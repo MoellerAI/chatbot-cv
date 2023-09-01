@@ -1,8 +1,11 @@
-from pathlib import Path
+import os
 
+from dotenv import load_dotenv
 from fastapi import FastAPI
 from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
+
+load_dotenv()
 
 app = FastAPI()
 
@@ -15,7 +18,3 @@ async def index():
 @app.get("/favicon.ico")
 async def favicon():
     return FileResponse("static/favicon.ico")
-
-@app.get("/assets/{path:path}")
-async def assets(path: str):
-    return FileResponse(f"static/assets/{path}")
