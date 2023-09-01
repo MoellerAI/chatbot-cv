@@ -5,10 +5,17 @@
 install:
 	@echo "Installing dependencies..."
 	@cd apps/backend && poetry install
+	@cd apps/frontend && npm install
 
+build-frontend:
+	@echo "Building frontend..."
+	@cd apps/frontend && npm run build
+	
 run:
+	@echo "Building frontend..."
+	@$(MAKE) build-frontend
 	@echo "Starting FastAPI application..."
-	@cd apps/backend && poetry run uvicorn main:app --reload
+	@cd apps/backend && poetry run uvicorn main:app --host 0.0.0.0 --port 8000
 
 test:
 	@echo "Running tests..."
