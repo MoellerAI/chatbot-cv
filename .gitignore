@@ -9,11 +9,11 @@ static
 
 # Virtual environments (venv for local, pypoetry for global)
 .venv/
-apps/backend/.coverage
 *.venv
 *.pyenv
 *.pypackage
-.coverage
+/apps/backend/.coverage
+/apps/backend/poetry.lock
 .env
 
 *.pytest_cache/
