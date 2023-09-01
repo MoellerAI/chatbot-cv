@@ -25,14 +25,12 @@ class SimilaritySearch:
 
     def _initialize(self):
         loader = PyPDFLoader(self.data_path)
-        documents = loader.load()
-        text_splitter = CharacterTextSplitter(chunk_size=self.chunk_size, chunk_overlap=self.chunk_overlap)
-        docs = text_splitter.split_documents(documents)
+        pages = loader.load_and_split()
 
         embeddings = OpenAIEmbeddings(openai_api_key=self.openai_api_key)
 
         self.qdrant = Qdrant.from_documents(
-            docs,
+            pages,
             embeddings,
             url=self.qdrant_url,
             prefer_grpc=True,
